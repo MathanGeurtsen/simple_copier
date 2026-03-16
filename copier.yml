@@ -1,0 +1,27 @@
+_min_copier_version: "9.0.0"
+_subdirectory: project
+_templates_suffix: ""
+_tasks:
+  - git init
+  - uv sync
+
+# Hidden variable: current year computed at generation time
+current_year:
+  type: str
+  default: "{{ '%Y' | strftime }}"
+  when: false
+
+project_name:
+  type: str
+  default: project_name
+  help: The name of your project (must be a valid Python package name)
+
+project_description:
+  type: str
+  default: Describe the project.
+  help: A short description of your project
+
+author:
+  type: str
+  default: Your Name
+  help: The name of the project author
