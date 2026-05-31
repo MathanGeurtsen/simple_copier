@@ -37,4 +37,4 @@ You can run checks (linting, type checking, and tests) with `poe check`.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+TODO: figure out your license!
