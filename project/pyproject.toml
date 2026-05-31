@@ -7,6 +7,9 @@ authors         = [{ name = "{{author}}" }, ]
 requires-python = ">=3.9"
 dependencies    = []
 
+[tool.uv]
+package = true
+
 [dependency-groups]
 dev = [
   "pytest-cov~=6.0.0",
