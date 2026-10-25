@@ -22,8 +22,9 @@ Setup dependencies in a virtual environment using [uv](https://docs.astral.sh/uv
 uv sync
 ```
 
-The prek Git hook is installed automatically when the project is generated.
-Once project files are tracked by Git, run all configured hooks manually with:
+Prek's Git hooks are installed automatically when the project is generated.
+Commit messages must follow Conventional Commits and include a scope, for example `feat(api): add an endpoint`.
+Once project files are tracked by Git, run all file hooks manually with:
 ```bash
 uv run prek run --all-files
 ```

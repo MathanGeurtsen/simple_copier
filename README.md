@@ -27,7 +27,7 @@ powershell compatible on windows:
 cd my_project; . .venv/Scripts/activate
 ```
 
-You can run checks (linting, type checking, and tests) with `poe check`. 
+You can run checks (linting, type checking, and tests) with `poe check`.
 
 ### Updating an existing project
 
@@ -42,6 +42,22 @@ copier update --trust
 - copier
 - uv
 - git
+
+## Development
+
+This repository uses prek for whitespace checks and Conventional Commit messages. Install its Git hooks with:
+
+```bash
+uvx prek install
+```
+
+Run file hooks against tracked files with:
+
+```bash
+uvx prek run --all-files
+```
+
+The generated Python projects have their own prek configuration for Ruff and ty.
 
 ## License
 

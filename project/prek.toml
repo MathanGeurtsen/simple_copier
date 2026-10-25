@@ -1,3 +1,5 @@
+default_install_hook_types = ["pre-commit", "commit-msg"]
+
 [[repos]]
 repo = "builtin"
 hooks = [
@@ -11,4 +13,11 @@ hooks = [
   { id = "ruff-check", name = "Ruff check", entry = "uv run ruff check --fix", language = "system", types = ["python"] },
   { id = "ruff-format", name = "Ruff format", entry = "uv run ruff format", language = "system", types = ["python"] },
   { id = "ty-check", name = "ty check", entry = "uv run ty check", language = "system", types = ["python"] },
+]
+
+[[repos]]
+repo = "https://github.com/compilerla/conventional-pre-commit"
+rev = "v4.4.0"
+hooks = [
+  { id = "conventional-pre-commit", stages = ["commit-msg"], args = ["--force-scope", "chore", "feat", "fix"] },
 ]
