@@ -16,7 +16,7 @@ dev = [
   "poethepoet~=0.32.1",
   "pytest~=8.3.4",
   "ruff~=0.9.3",
-  "pyright~=1.1",
+  "ty~=0.0.91",
 ]
 
 [tool.poe.tasks]
@@ -24,7 +24,7 @@ test              = "pytest --cov"
 lint_check        = "ruff check --fix"
 lint_format       = "ruff format"
 lock_check        = "uv lock --check"
-type_check        = "pyright"
+type_check        = "ty check"
 check_doc         = "python -m doctest -v README.md"
 _check            = [
 	"lint_check",
@@ -44,40 +44,112 @@ build = [
 ]
 
 
+# Approximate a strict type-checking policy; ty has no strictness-mode switch.
+[tool.ty.rules]
+dynamic-function-decorator-return = "error"
+missing-type-argument = "error"
+possibly-unresolved-reference = "warn"
+unsound-return-statement = "error"
+
 [tool.ruff]
-line-length  = 100
-indent-width = 4
+line-length = 120
+output-format = "grouped"
+include = [".github/*.py", "src/**/*.py", "tests/**/*.py"]
 
 [tool.ruff.lint]
+preview = true # Enables future not-yet-official rules.
 select = [
-  "E",      # pycodestyle
-  "W",      # pycodestyle warning
-  "F",      # pyflakes
-  "D",      # docstyle
-  "B",      # bugbear 
-  "UP",     # pyupgrade
-  "FIX002", # check TODOs
-  "PD",     # pandas linter
-  "ERA",    # outcommented code checker
-  "C901",   # complexity check
+  "A",
+  "ANN",
+  "ARG",
+  "B",
+  "BLE",
+  "C901",
+  "D101",
+  "D102",
+  "D103",
+  "D200",
+  "D205",
+  "D403",
+  "D405",
+  "D415",
+  "D417",
+  "D419",
+  "C4",
+  "DTZ",
+  "E",
+  "EM",
+  "ERA",
+  "F",
+  "FURB",
+  "I",
+  "N",
+  "PD",
+  "PERF",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "PYI",
+  "RUF",
+  "S",
+  "SIM",
+  "UP",
+  "W",
+  "TD",
 ]
-
 ignore = [
-  "D203", # no-blank-line-before-class
-  "D213", # multi-line-summary-second-line
-  "D401", # non-imperative-mood
-  "D100", # Missing docstring in public module
-  "D205", # 1 blank line required
-  "D400", # First line should end with a period
-  "D415", # First line should end with a period
-  "D212", # comment on first line
+  "PLC0415",
+  "PLC1901",
+  "PLR6301",
+  "SIM300",
+  "TD002",
+  "EM101",
+  "EM102",
 ]
 
-fixable   = ["ALL"]
-unfixable = []
+[tool.ruff.lint.isort]
+known-first-party = ["{{project_name}}", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D"]
+"tests/**/*.py" = [
+  "ANN",
+  "ARG001",
+  "ARG002",
+  "B018",
+  "PLC2701",
+  "PLR2004",
+  "PLR0904",
+  "PLR0913",
+  "PLR0917",
+  "RUF018",
+  "S101",
+  "N801",
+  "D",
+]
+
+[tool.ruff.lint.flake8-annotations]
+suppress-none-returning = true
+suppress-dummy-args = true
+allow-star-arg-any = true
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+  "fastapi.Depends",
+  "fastapi.params.Depends",
+  "fastapi.Query",
+  "fastapi.params.Query",
+]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-allowed-modules = ["trace"]
+
+[tool.ruff.lint.pylint]
+max-args = 7
+allow-dunder-method-names = ["__pydantic_init_subclass__"]
 
 [tool.ruff.format]
-quote-style               = "double"
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
