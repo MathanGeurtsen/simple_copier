@@ -22,6 +22,12 @@ Setup dependencies in a virtual environment using [uv](https://docs.astral.sh/uv
 uv sync
 ```
 
+The prek Git hook is installed automatically when the project is generated.
+Once project files are tracked by Git, run all configured hooks manually with:
+```bash
+uv run prek run --all-files
+```
+
 The virtual environment is activated automatically if you use [direnv](https://direnv.net/).
 
 If not, activate the virtual environment (bash compatible on linux):
@@ -33,7 +39,7 @@ Activate the virtual environment (powershell compatible on windows):
 . .venv/Scripts/activate
 ```
 
-You can run checks (linting, type checking, and tests) with `poe check`. 
+You can run checks (linting, type checking, and tests) with `poe check`.
 
 ## License
 

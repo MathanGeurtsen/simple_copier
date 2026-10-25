@@ -4,6 +4,7 @@ _templates_suffix: ""
 _tasks:
   - git init
   - uv sync
+  - uv run prek install
 
 # Hidden variable: current year computed at generation time
 current_year:
